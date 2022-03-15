@@ -98,8 +98,7 @@ impl State for GameState {
 
         console.fill(pixel::pxl_fg('.', Color::DarkGrey));
         console.print(0, 0, format!("Score: {}", self.score).as_str());
-        self.player.draw(console);
-        self.food.draw(console);
+        self.player.draw(console); self.food.draw(console);
         console.draw();
     }
 }
@@ -190,6 +189,18 @@ impl Player {
             self.previous_location = Some(self.location.clone());
         }
         self.location.add(self.velocity);
+        if self.location.x > BOARD_WIDTH as i32 {
+            self.location.x = 0;
+        }
+        if self.location.x < 0 {
+            self.location.x = BOARD_WIDTH as i32;
+        }
+        if self.location.y > BOARD_HEIGHT as i32 {
+            self.location.y = 0;
+        }
+        if self.location.y < 0 {
+            self.location.y = BOARD_HEIGHT as i32;
+        }
         if let Some(mut segment) = self.body.pop_back() {
             let previous_location = self.previous_location.clone().unwrap();
             segment.location.x = previous_location.x;
