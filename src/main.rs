@@ -50,6 +50,7 @@ impl State for GameState {
 
     fn update(&mut self, context: &mut Context) -> OptionalTransition {
         let console = get_console(context);
+        console.wait_for_frame();
 
         if self.player.location == self.food.location {
             self.score += 1;
@@ -93,8 +94,6 @@ impl State for GameState {
 
     fn render(&mut self, context: &mut Context) -> RenderResult {
         let console = get_console(context);
-
-        console.wait_for_frame();
 
         console.fill(pixel::pxl_fg('.', Color::DarkGrey));
         console.print(0, 0, format!("Score: {}", self.score).as_str());
