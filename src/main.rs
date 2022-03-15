@@ -81,7 +81,7 @@ impl State for GameState {
             self.player.velocity.y = 0;
         }
         if console.is_key_pressed(KeyCode::Char('q')) {
-            return Some(Transition::Quit);
+            return Some(Transition::Push(Box::from(LoseState::new(self.score))));
         }
         if console.is_key_pressed(KeyCode::Char('g')) {
             self.player.grow();
