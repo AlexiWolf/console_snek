@@ -63,26 +63,26 @@ impl State for GameState {
             }
         }
 
-        if console.is_key_held(KeyCode::Up) {
+        if console.is_key_pressed(KeyCode::Up) {
             self.player.velocity.y = -1;
             self.player.velocity.x = 0;
         }
-        if console.is_key_held(KeyCode::Down) {
+        if console.is_key_pressed(KeyCode::Down) {
             self.player.velocity.y = 1;
             self.player.velocity.x = 0;
         }
-        if console.is_key_held(KeyCode::Left) {
+        if console.is_key_pressed(KeyCode::Left) {
             self.player.velocity.x = -1;
             self.player.velocity.y = 0;
         }
-        if console.is_key_held(KeyCode::Right) {
+        if console.is_key_pressed(KeyCode::Right) {
             self.player.velocity.x = 1;
             self.player.velocity.y = 0;
         }
-        if console.is_key_held(KeyCode::Char('q')) {
+        if console.is_key_pressed(KeyCode::Char('q')) {
             return Some(Transition::Quit);
         }
-        if console.is_key_held(KeyCode::Char('g')) {
+        if console.is_key_pressed(KeyCode::Char('g')) {
             self.player.grow();
         }
 
@@ -133,10 +133,10 @@ impl State for LoseState {
     fn update(&mut self, context: &mut Context) -> OptionalTransition {
         let console = get_console(context);
 
-        if console.is_key_held(KeyCode::Char('y')) {
+        if console.is_key_pressed(KeyCode::Char('y')) {
             return Some(Transition::CleanPush(Box::from(GameState::new())));
         }
-        if console.is_key_held(KeyCode::Char('n')) || console.is_key_held(KeyCode::Char('q')) {
+        if console.is_key_pressed(KeyCode::Char('n')) || console.is_key_pressed(KeyCode::Char('q')) {
             return Some(Transition::Quit);
         }
 
@@ -305,8 +305,8 @@ impl ConsoleContext {
         self.console.draw();
     }
 
-    pub fn is_key_held(&self, key: KeyCode) -> bool {
-        self.console.is_key_held(key)
+    pub fn is_key_pressed(&self, key: KeyCode) -> bool {
+        self.console.is_key_pressed(key)
     }
 
     pub fn fill(&mut self, pixel: Pixel) {
