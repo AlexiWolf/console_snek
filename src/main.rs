@@ -60,7 +60,7 @@ impl State for GameState {
 
         for body_segment in self.player.body.iter() {
             if self.player.location == body_segment.location {
-                return Some(Transition::Push(Box::from(LoseState::new(self.score))));
+                return Some(Transition::Push(Box::from(GameOverState::new(self.score))));
             }
         }
 
@@ -81,7 +81,7 @@ impl State for GameState {
             self.player.velocity.y = 0;
         }
         if console.is_key_pressed(KeyCode::Char('q')) {
-            return Some(Transition::Push(Box::from(LoseState::new(self.score))));
+            return Some(Transition::Push(Box::from(GameOverState::new(self.score))));
         }
         if console.is_key_pressed(KeyCode::Char('g')) {
             self.player.grow();
@@ -123,11 +123,11 @@ impl GameState {
     }
 }
 
-pub struct LoseState {
+pub struct GameOverState {
     score: u32,
 }
 
-impl State for LoseState {
+impl State for GameOverState {
     fn update(&mut self, context: &mut Context) -> OptionalTransition {
         let console = get_console(context);
 
@@ -154,7 +154,7 @@ impl State for LoseState {
     }
 }
 
-impl LoseState {
+impl GameOverState {
     pub fn new(score: u32) -> Self {
         Self { score }
     }
