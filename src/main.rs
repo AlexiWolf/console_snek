@@ -7,25 +7,25 @@ use log::*;
 use rand::prelude::*;
 use wolf_engine::*;
 
-const BOARD_WIDTH: usize = 80;
-const BOARD_HEIGHT: usize = 20;
+const GAME_WIDTH: usize = 80;
+const GAME_HEIGHT: usize = 20;
 
 fn main() {
     logging::initialize_logging(LevelFilter::Info);
 
     let (width, height) = term_size::dimensions().expect("could not determine terminal size");
 
-    if BOARD_WIDTH > width || BOARD_HEIGHT > height {
+    if GAME_WIDTH > width || GAME_HEIGHT > height {
         error!(
             "Your screen is too small, it must be at least {} x {} characters.",
-            BOARD_WIDTH, BOARD_HEIGHT
+            GAME_WIDTH, GAME_HEIGHT
         );
         exit(1)
     }
 
     let mut context = Context::new();
     context
-        .add(ConsoleContext::new(BOARD_WIDTH as u32, BOARD_HEIGHT as u32, 10))
+        .add(ConsoleContext::new(GAME_WIDTH as u32, GAME_HEIGHT as u32, 10))
         .expect("failed to add ConsoleContext");
 
     EngineBuilder::new()
@@ -117,8 +117,8 @@ impl GameState {
     }
 
     fn get_random_location(&mut self) -> Vector2 {
-        let x = self.rng.gen_range(1..BOARD_WIDTH);
-        let y = self.rng.gen_range(1..BOARD_HEIGHT);
+        let x = self.rng.gen_range(1..GAME_WIDTH);
+        let y = self.rng.gen_range(1..GAME_HEIGHT);
         Vector2::new(x as i32, y as i32)
     }
 }
@@ -188,17 +188,17 @@ impl Snake {
             self.previous_location = Some(self.location.clone());
         }
         self.location.add(self.velocity);
-        if self.location.x > BOARD_WIDTH as i32 {
+        if self.location.x > GAME_WIDTH as i32 {
             self.location.x = 0;
         }
         if self.location.x < 0 {
-            self.location.x = BOARD_WIDTH as i32;
+            self.location.x = GAME_WIDTH as i32;
         }
-        if self.location.y > BOARD_HEIGHT as i32 {
+        if self.location.y > GAME_HEIGHT as i32 {
             self.location.y = 0;
         }
         if self.location.y < 0 {
-            self.location.y = BOARD_HEIGHT as i32;
+            self.location.y = GAME_HEIGHT as i32;
         }
         if let Some(mut segment) = self.body.pop_back() {
             let previous_location = self.previous_location.clone().unwrap();
