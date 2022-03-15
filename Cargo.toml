@@ -1,0 +1,20 @@
+[package]
+name = "console_snek"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+wolf_engine = { version = "0.11", features = ["logging"] }
+log = "0.4"
+console_engine = "2.3"
+term_size = "0.3"
+rand = "0.8"
+
+[profile.release]
+#lto = true
+codegen-units = 1
+opt-level = "s"
+#strip = true
+panic = "abort"
