@@ -147,7 +147,7 @@ impl State for LoseState {
         console.print(
             0,
             0,
-            format!("You died!  You got {} points!", self.score).as_str(),
+            format!("Game Over. You got {} points!", self.score).as_str(),
         );
         console.print(0, 1, "Play again? (y / n)");
         console.draw();
