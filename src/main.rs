@@ -64,19 +64,19 @@ impl State for GameState {
             }
         }
 
-        if console.is_key_pressed(KeyCode::Up) {
+        if console.is_key_pressed(KeyCode::Up) && self.player.velocity.y != 1 {
             self.player.velocity.y = -1;
             self.player.velocity.x = 0;
         }
-        if console.is_key_pressed(KeyCode::Down) {
+        if console.is_key_pressed(KeyCode::Down) && self.player.velocity.y != -1 {
             self.player.velocity.y = 1;
             self.player.velocity.x = 0;
         }
-        if console.is_key_pressed(KeyCode::Left) {
+        if console.is_key_pressed(KeyCode::Left) && self.player.velocity.x != 1 {
             self.player.velocity.x = -1;
             self.player.velocity.y = 0;
         }
-        if console.is_key_pressed(KeyCode::Right) {
+        if console.is_key_pressed(KeyCode::Right) && self.player.velocity.x != -1{
             self.player.velocity.x = 1;
             self.player.velocity.y = 0;
         }
