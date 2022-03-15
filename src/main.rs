@@ -199,7 +199,7 @@ impl Player {
     }
 
     pub fn draw(&mut self, console: &mut ConsoleContext) {
-        console.set_pxl(
+        console.set_pixel(
             self.location.x,
             self.location.y,
             pixel::pxl_fg('@', Color::DarkGreen),
@@ -229,7 +229,7 @@ impl BodySegment {
     }
 
     pub fn draw(&self, console: &mut ConsoleContext) {
-        console.set_pxl(
+        console.set_pixel(
             self.location.x,
             self.location.y,
             pixel::pxl_fg('#', Color::Green),
@@ -249,7 +249,7 @@ impl Food {
     }
 
     pub fn draw(&self, console: &mut ConsoleContext) {
-        console.set_pxl(
+        console.set_pixel(
             self.location.x,
             self.location.y,
             pixel::pxl_fg('*', Color::Red),
@@ -297,7 +297,7 @@ impl ConsoleContext {
         self.console.clear_screen();
     }
 
-    pub fn set_pxl(&mut self, x: i32, y: i32, character: Pixel) {
+    pub fn set_pixel(&mut self, x: i32, y: i32, character: Pixel) {
         self.console.set_pxl(x, y, character);
     }
 
