@@ -36,7 +36,7 @@ fn main() {
 
 struct GameState {
     rng: ThreadRng,
-    player: Player,
+    player: Snake,
     score: u32,
     food: Food,
 }
@@ -107,7 +107,7 @@ impl GameState {
     pub fn new() -> Self {
         Self {
             rng: thread_rng(),
-            player: Player::new(0, 1),
+            player: Snake::new(0, 1),
             score: 0,
             food: Food::new(0, 0),
         }
@@ -167,14 +167,14 @@ fn get_console(context: &mut Context) -> &mut ConsoleContext {
         .expect("no ConsoleContext")
 }
 
-pub struct Player {
+pub struct Snake {
     pub location: Vector2,
     pub previous_location: Option<Vector2>,
     pub velocity: Vector2,
     pub body: VecDeque<BodySegment>,
 }
 
-impl Player {
+impl Snake {
     pub fn new(x: i32, y: i32) -> Self {
         Self {
             location: Vector2::new(x, y),
