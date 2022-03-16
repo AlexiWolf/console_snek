@@ -67,19 +67,17 @@ impl State for GameState {
         if console.is_key_pressed(KeyCode::Up) && self.player.velocity.y != 1 {
             self.player.velocity.y = -1;
             self.player.velocity.x = 0;
-        }
-        if console.is_key_pressed(KeyCode::Down) && self.player.velocity.y != -1 {
+        } else if console.is_key_pressed(KeyCode::Down) && self.player.velocity.y != -1 {
             self.player.velocity.y = 1;
             self.player.velocity.x = 0;
-        }
-        if console.is_key_pressed(KeyCode::Left) && self.player.velocity.x != 1 {
+        } else if console.is_key_pressed(KeyCode::Left) && self.player.velocity.x != 1 {
             self.player.velocity.x = -1;
             self.player.velocity.y = 0;
-        }
-        if console.is_key_pressed(KeyCode::Right) && self.player.velocity.x != -1{
+        } else if console.is_key_pressed(KeyCode::Right) && self.player.velocity.x != -1{
             self.player.velocity.x = 1;
             self.player.velocity.y = 0;
         }
+
         if console.is_key_pressed(KeyCode::Char('q')) {
             return Some(Transition::Push(Box::from(GameOverState::new(self.score))));
         }
