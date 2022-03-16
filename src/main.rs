@@ -188,17 +188,17 @@ impl Snake {
             self.previous_location = Some(self.location.clone());
         }
         self.location.add(self.velocity);
-        if self.location.x > GAME_WIDTH as i32 {
+        if self.location.x > GAME_WIDTH as i32 - 1 {
             self.location.x = 0;
         }
         if self.location.x < 0 {
-            self.location.x = GAME_WIDTH as i32;
+            self.location.x = GAME_WIDTH as i32 - 1;
         }
-        if self.location.y > GAME_HEIGHT as i32 {
+        if self.location.y > GAME_HEIGHT as i32 - 1{
             self.location.y = 0;
         }
         if self.location.y < 0 {
-            self.location.y = GAME_HEIGHT as i32;
+            self.location.y = GAME_HEIGHT as i32 - 1;
         }
         if let Some(mut segment) = self.body.pop_back() {
             let previous_location = self.previous_location.clone().unwrap();
